@@ -2,14 +2,14 @@ class Task {
   String title;
   bool isCompleted;
   bool isImportant;
-  DateTime? dueTime;
+  DateTime? dueDate;
   int priorty;
 
   Task({
     required this.title,
     this.isCompleted = false,
     this.isImportant = false,
-    this.dueTime,
+    this.dueDate,
     this.priorty = 0,
   });
 
@@ -18,7 +18,7 @@ class Task {
       title: json['title'],
       isCompleted: json['isCompleted'] ?? false,
       isImportant: json['isImportant'] ?? false,
-      dueTime: json['dueTime'] != null ? DateTime.parse(json['dueTime']) : null,
+      dueDate: json['dueDate'] != null ? DateTime.parse(json['dueDate']) : null,
       priorty: json['priorty'] ?? 0,
     );
   }
@@ -28,7 +28,7 @@ class Task {
       'title': title,
       'isCompleted': isCompleted,
       'isImportant': isImportant,
-      'dueTime': dueTime,
+      'dueDate': dueDate?.toIso8601String(),
       'priorty': priorty,
     };
   }
