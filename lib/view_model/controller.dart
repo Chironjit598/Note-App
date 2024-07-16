@@ -1,3 +1,3 @@
-class Tast{
-  
+class Tast {
+  String? name;
 }
