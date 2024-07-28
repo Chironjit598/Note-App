@@ -82,8 +82,16 @@ class TodoListScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // Expanded(
+              //     child: Obx(() => ListView.builder(
+              //         itemCount: 5,
+              //         itemBuilder: (context, index) {
+              //           return Text("HI");
+              //         })))
+
               Expanded(
-                  child: Obx(() => ListView.builder(
+                  child: ListView.builder(
                       itemCount: taskViewModel.tasks.length,
                       itemBuilder: (context, index) {
                         final task = taskViewModel.tasks[index];
@@ -101,8 +109,34 @@ class TodoListScreen extends StatelessWidget {
                                     ? FontWeight.bold
                                     : FontWeight.normal),
                           ),
+                          subtitle: task.dueDate != null
+                              ? Text(
+                                  "Due Date: ${task.dueDate!.toLocal()}",
+                                  style: const TextStyle(color: Colors.green),
+                                )
+                              : null,
+                          trailing: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () =>
+                                    taskViewModel.toggleTaskCompletion(index),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () => taskViewModel.showDatePickerDialog(
+                                    context, index),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
                         );
-                      })))
+                      }))
             ],
           ),
         ),
